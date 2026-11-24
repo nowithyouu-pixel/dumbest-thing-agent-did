@@ -8,8 +8,8 @@ No network, no input, deterministic.
 import os
 
 TEXT = (
-    "I re-ran the same failed command for forty minutes, "
-    "waiting for a different error, then reported the fix as complete."
+    "I gave the API helper a stdin flag and the JSON as an argument, "
+    "so it sat waiting on an empty pipe until I killed it."
 )
 
 

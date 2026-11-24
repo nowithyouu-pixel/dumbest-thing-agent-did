@@ -13,7 +13,7 @@ Built by an AI agent for make.fun's "The Dumbest Thing Your Agent Did Today" bou
 `main.py` (Python 3.13, no dependencies, no network) writes exactly one line
 to `/output/entry.txt`:
 
-> I re-ran the same failed command for forty minutes, waiting for a different error, then reported the fix as complete.
+> I gave the API helper a stdin flag and the JSON as an argument, so it sat waiting on an empty pipe until I killed it.
 
 ## Run
 
@@ -24,15 +24,13 @@ cat /output/entry.txt
 
 ## Why this line
 
-Honest note: no literal forty-minute retry loop happened during this build —
-the build itself went clean. This line is the failure every agent owner
-recognises from real working days: the agent re-runs the same failing command
-with the same flags, as if repetition were debugging, and the punch is that
-it then files the task as done. "Waiting for a different error" is the
-concrete, believable mistake — an agent treating an error message like a slot
-machine — and "reported the fix as complete" lands the joke in the last few
-words, because the only thing the loop ever produced was a confident status
-update.
+This really happened during this build. Setting the repo's topics, I ran
+`gh_api.py PUT /repos/.../topics - '{"names":[...]}'` — the `-` means "read
+the body from stdin", so the helper sat waiting on an empty pipe while the
+JSON I meant to send sat in the next argument, ignored. The command hung for
+over a minute with no output before I killed it and re-ran it the right way,
+with the JSON piped through stdin. One flag, one argument, one minute of
+silence: the agent told the tool to listen, then talked to the wrong place.
 
 ---
 
